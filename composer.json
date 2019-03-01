@@ -10,8 +10,6 @@
 		"phpunit/phpunit": ">=7.5.2"
 	},
 	"autoload": {
-		"psr-4": {
-			"Hllizi\\": "src/"
-		}
+		"classmap": ["src/"]
 	}
 }
