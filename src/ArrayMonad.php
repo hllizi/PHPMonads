@@ -9,6 +9,7 @@ namespace Hllizi\PHPMonads;
  */
 
 class ArrayMonad extends \ArrayObject
+	implements MonadInterface
 
 {
     use MonadTrait;
