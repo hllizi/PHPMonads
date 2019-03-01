@@ -10,7 +10,7 @@
 namespace Hllizi\PHPMonads;
 
 use \ReflectionClass;
-use Hllizi\PHPMonads;
+use \Hllizi\PHPMonads;
 
 class MonadTest extends \PHPUnit\Framework\TestCase
 
