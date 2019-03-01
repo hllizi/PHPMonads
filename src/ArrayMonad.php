@@ -2,18 +2,31 @@
 namespace Hllizi\PHPMonads;
 
 /**
- * Created by PhpStorm.
- * User: David Lahm
- * Date: 27.02.19
- * Time: 11:33
+ * ArrayMonad 
+ * 
+ * @package phpmonads
+ * @copyright David Lahm 
+ * @author David Lahm 
+ * @license GPL-2 
+ *
+ * The class extends ArrayObject with the monad trait, providing appropriate implementations for bind() and return(), and adds additional convenient methods.
  */
-
 class ArrayMonad extends \ArrayObject
 	implements MonadInterface
 
 {
     use MonadTrait;
 
+    /**
+     * __construct 
+     * 
+     * @param array $data 
+     * @param bool $recursive 
+     * @access public
+     * @return void
+     *
+     * If $recursive is true, any element of $data that is an array itself will also be turned into an ArrayMonad.
+     */
     public function __construct(array $data = [], bool $recursive = false)
     {
         $converted = [];
@@ -27,6 +40,15 @@ class ArrayMonad extends \ArrayObject
         parent::__construct($converted);
     }
 
+    /**
+     * bind 
+     * 
+     * @param callable $function 
+     * @access public
+     * @return void
+     *
+     * Bind applies its argument to each element of the array and concatenates the results.
+     */
     public function bind(callable $function)
     {
         $result = new ArrayMonad();
@@ -39,11 +61,29 @@ class ArrayMonad extends \ArrayObject
         return $result;
     }
 
+    /**
+     * return 
+     * 
+     * @param mixed $x 
+     * @access public
+     * @return void
+     *
+     * Returns the singleton ArrayMonad containing its argument.
+     */
     public function return($x)
     {
         return new ArrayMonad([$x]);
     }
 
+    /**
+     * getArrayCopy 
+     * 
+     * @param mixed $recursive 
+     * @access public
+     * @return void
+     *
+     * Adds to the parent method the $recursive flag: if recursive is set, any object of class self will also be turned into an array.
+     */
     public function getArrayCopy($recursive = false)
     {
         if($recursive) {

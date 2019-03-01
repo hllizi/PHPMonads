@@ -8,6 +8,10 @@
 
 namespace Hllizi\PHPMonads;
 
+/**
+ *  
+ *  The trait demands that the abstract methods bind and return be implemented and thickens the interface by providing implementing map and join based on these two.
+ */
 trait MonadTrait
 {
     public abstract function bind(callable $function);
