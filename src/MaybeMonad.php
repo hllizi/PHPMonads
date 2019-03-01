@@ -3,6 +3,7 @@
 namespace Hllizi\PHPMonads;
 
 class MaybeMonad
+	implements MonadInterface
 {
     use MonadTrait;
 
