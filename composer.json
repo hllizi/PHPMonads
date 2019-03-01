@@ -1,6 +1,8 @@
 {
 	"name": "hllizi/phpmonads",
 	"description": "Brings monads to php; defines a monad trait and several monads",
+	"authors": [{"name": "David Lahm"}],
+	"license": "GPL-2.0",
 	"require": {
 		"php": ">=7.1"
 	},
