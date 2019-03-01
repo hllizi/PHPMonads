@@ -1,5 +1,4 @@
 <?php
-
 namespace Hllizi\PHPMonads;
 
 class MaybeMonad

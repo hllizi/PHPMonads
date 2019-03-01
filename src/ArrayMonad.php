@@ -1,15 +1,7 @@
 <?php
 namespace Hllizi\PHPMonads;
 
-/**
- * Created by PhpStorm.
- * User: David Lahm
- * Date: 27.02.19
- * Time: 11:33
- */
-
 class ArrayMonad extends \ArrayObject
-
 {
     use MonadTrait;
 

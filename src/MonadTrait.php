@@ -1,11 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: David Lahm
- * Date: 27.02.19
- * Time: 10:58
- */
-
 namespace Hllizi\PHPMonads;
 
 trait MonadTrait
@@ -35,5 +28,4 @@ trait MonadTrait
         return $this->bind($lifted);
 
     }
-
 }
