@@ -99,4 +99,36 @@ class MonadTest extends \PHPUnit\Framework\TestCase
         $am = new ArrayMonad($this->numbers);
         $this->assertEquals([2,4,6,8,10], $am->map(function ($i) {return $i*2;})->getArrayCopy());
     }
+
+    public function testMaybeToArray()
+    {
+	    $maybe = new MaybeMonad('foo');
+	    $maybe->setArrayObjectPrototype(new ArrayMonad([]));
+	    $arrayMonad = $maybe->toArrayObject();
+	    $maybe->setArrayObjectPrototype(new \ArrayObject([]));
+	    $arrayObject = $maybe->toArrayObject();
+	    $this->assertEquals('foo', $arrayMonad[0]);
+	    $this->assertEquals('foo', $arrayObject[0]);
+	    $this->assertInstanceOf(ArrayMonad::class, $arrayMonad);
+	    $this->assertInstanceOf(\ArrayObject::class, $arrayObject);
+    }
+
+    private function extractValue($obj, string $propertyName)
+    {
+	    $reflector = new ReflectionClass($obj);
+	    $property = $reflector->getProperty($propertyName);
+	    $property->setAccessible(true);
+	    return $property->getValue($obj);
+    }
+
+    public function testPrototypePassing()
+    {
+	    $m = new MaybeMonad('foo');
+	    $arrayObject = new \ArrayObject(['bar']);
+	    $m->setArrayObjectPrototype($arrayObject);
+	    $m2 = $m->return('baz');
+	    $this->assertEquals($arrayObject, $this->extractValue($m2, 'arrayObjectPrototype'));
+	    $m2 = $m->bind(function ($x) use ($m) {return $m->return($x);});
+	    $this->assertEquals($arrayObject, $this->extractValue($m2, 'arrayObjectPrototype'));
+    } 
 }
