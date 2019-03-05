@@ -20,6 +20,7 @@ class MaybeMonad
     use MonadTrait;
 
     private $value;
+    private $arrayObjectPrototype;
 
     public function __construct($value = null)
     {
@@ -38,7 +39,8 @@ class MaybeMonad
     public function bind(callable $method)
     {
         if($this->isSomething()) {
-            return call_user_func($method, $this->value);
+		$newMaybeMonad = call_user_func($method, $this->value);
+		return $newMaybeMonad->setArrayObjectPrototype($this->arrayObjectPrototype);
         } else {
             return $this;
         }
@@ -56,7 +58,7 @@ class MaybeMonad
     public function return($x)
     {
         if(isset($x)) {
-            return new MaybeMonad($x);
+            return (new MaybeMonad($x))->setArrayObjectPrototype($this->arrayObjectPrototype);
         } else {
             throw new IllicitValueException("MaybeMonad::return() cannot be used with null argument (use constructor instead).");
         }
@@ -111,9 +113,18 @@ class MaybeMonad
      *
      * Turn the object into a singleton ArrayMonad. (Dependencies here should be inverted).
      */
-    public function toArrayMonad()
+
+    public function toArrayObject()
     {
-        return new ArrayMonad($this->isSomething() ? [$this->value] : []);
+	$arrayObject = (clone $this->arrayObjectPrototype);
+	$arrayObject->exchangeArray($this->isSomething() ? [$this->value] : []);
+	return $arrayObject;
+    }
+
+    public function setArrayObjectPrototype($arrayObjectPrototype)
+    {
+	    $this->arrayObjectPrototype = $arrayObjectPrototype;
+	    return $this;
     }
 }
 /**
