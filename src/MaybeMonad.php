@@ -116,7 +116,7 @@ class MaybeMonad
 
     public function toArrayObject()
     {
-	$arrayObject = (clone $this->arrayObjectPrototype);
+	$arrayObject = isset($this->arrayObjectPrototype) ? (clone $this->arrayObjectPrototype) : new ArrayMonad();
 	$arrayObject->exchangeArray($this->isSomething() ? [$this->value] : []);
 	return $arrayObject;
     }

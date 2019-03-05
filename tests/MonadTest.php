@@ -107,9 +107,13 @@ class MonadTest extends \PHPUnit\Framework\TestCase
 	    $arrayMonad = $maybe->toArrayObject();
 	    $maybe->setArrayObjectPrototype(new \ArrayObject([]));
 	    $arrayObject = $maybe->toArrayObject();
+	    $maybe = new MaybeMonad('foo');
+	    $arrayObject2 = $maybe->toArrayObject();
 	    $this->assertEquals('foo', $arrayMonad[0]);
 	    $this->assertEquals('foo', $arrayObject[0]);
+	    $this->assertEquals('foo', $arrayObject[0]);
 	    $this->assertInstanceOf(ArrayMonad::class, $arrayMonad);
+	    $this->assertInstanceOf(\ArrayObject::class, $arrayObject);
 	    $this->assertInstanceOf(\ArrayObject::class, $arrayObject);
     }
 
