@@ -14,8 +14,21 @@ namespace Hllizi\PHPMonads;
  */
 trait MonadTrait
 {
+    /**
+     * @param callable $function
+     * @return mixed
+     */
     public abstract function bind(callable $function);
+
+    /**
+     * @param $x
+     * @return mixed
+     */
     public abstract function return($x);
+
+    /**
+     * @return mixed
+     */
 
     public function join()
     {
@@ -31,6 +44,10 @@ trait MonadTrait
         return $this->bind($id);
     }
 
+    /**
+     * @param callable $function
+     * @return mixed
+     */
     public function map(callable $function)
     {
         $lifted = function ($argument) use ($function) {

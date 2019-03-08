@@ -27,33 +27,30 @@ class MaybeMonad
         $this->value = $value;
     }
 
+
     /**
-     * bind 
-     * 
-     * @param callable $method 
-     * @access public
-     * @return void
+     * @param callable $method
+     * @return MaybeMonad
      *
      * Apply the argument to the value if the value is not null. Return $this otherwise.
      */
     public function bind(callable $method)
     {
         if($this->isSomething()) {
-		$newMaybeMonad = call_user_func($method, $this->value);
-		return $newMaybeMonad->setArrayObjectPrototype($this->arrayObjectPrototype);
+		    $newMaybeMonad = call_user_func($method, $this->value);
+		    return $newMaybeMonad->setArrayObjectPrototype($this->arrayObjectPrototype);
         } else {
             return $this;
         }
     }
 
+
     /**
-     * return 
-     * 
-     * @param mixed $x 
-     * @access public
-     * @return void
+     * @param $x
+     * @return MaybeMonad
+     * @throws IllicitValueException
      *
-     * Construct a new object using the argument if the argument is not null. Throw an exception otherwise. (Since a MaybeMonad object with a null value is interpreted as Nothing and return should not return nothing.) 
+     * Construct a new object using the argument if the argument is not null. Throw an exception otherwise. (Since a MaybeMonad object with a null value is interpreted as Nothing and return should not return nothing.)
      */
     public function return($x)
     {
@@ -65,10 +62,7 @@ class MaybeMonad
     }
 
     /**
-     * getValue 
-     * 
-     * @access public
-     * @return void
+     * @return |null
      *
      * Extract the value. (Regardless of whtether null or not.
      */
@@ -77,25 +71,20 @@ class MaybeMonad
         return $this->value;
     }
 
+
     /**
-     * isSomething 
-     * 
-     * @access public
-     * @return void
+     * @return bool
      *
      * True if the object has a defined (non-null) value.
      */
-
     public function isSomething()
     {
         return isset($this->value);
     }
 
+
     /**
-     * isNothing 
-     * 
-     * @access public
-     * @return void
+     * @return bool
      *
      * True if the object has a null value.
      */
@@ -104,12 +93,12 @@ class MaybeMonad
         return !isSomething();
     }
 
-    
+
     /**
-     * toArrayMonad 
-     * 
+     * toArrayMonad
+     *
      * @access public
-     * @return void
+     * @return ArrayMonad
      *
      * Turn the object into a singleton ArrayMonad. (Dependencies here should be inverted).
      */

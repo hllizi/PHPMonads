@@ -40,12 +40,10 @@ class ArrayMonad extends \ArrayObject
         parent::__construct($converted);
     }
 
+
     /**
-     * bind 
-     * 
-     * @param callable $function 
-     * @access public
-     * @return void
+     * @param callable $function
+     * @return ArrayMonad
      *
      * Bind applies its argument to each element of the array and concatenates the results.
      */
@@ -61,14 +59,10 @@ class ArrayMonad extends \ArrayObject
         return $result;
     }
 
+
     /**
-     * return 
-     * 
-     * @param mixed $x 
-     * @access public
-     * @return void
-     *
-     * Returns the singleton ArrayMonad containing its argument.
+     * @param $x
+     * @return ArrayMonad
      */
     public function return($x)
     {
