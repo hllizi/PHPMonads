@@ -74,7 +74,7 @@ class ArrayMonad extends \ArrayObject
      * 
      * @param mixed $recursive 
      * @access public
-     * @return void
+     * @return array
      *
      * Adds to the parent method the $recursive flag: if recursive is set, any object of class self will also be turned into an array.
      */
