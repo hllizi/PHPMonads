@@ -90,4 +90,20 @@ class ArrayMonad extends \ArrayObject
         }
         return $array;
     }
+
+    /**
+     * @param $initial
+     * @param callable $function
+     *
+     * Fold function
+     */
+    public function fold($initial, callable $function)
+    {
+        $value = $initial;
+        foreach($this as $current)
+        {
+            $value = call_user_func_array($function, [$value, $current]);
+        }
+        return $value;
+    }
 }
