@@ -15,6 +15,7 @@ use \Hllizi\PHPMonads;
 class MonadTest extends \PHPUnit\Framework\TestCase
 
 {
+    //Tests for fulfilling monad laws are not executed for "\Hllizi\PHPMonads\ContinuationMonad" since equality of closure cannot be tested. Eventually, pointwise testing should be put in place.
     private $testMonads = ["\Hllizi\PHPMonads\MaybeMonad", "\Hllizi\PHPMonads\ArrayMonad"];
     private $numbers = [1, 2, 3, 4, 5];
     private $function;
