@@ -12,7 +12,7 @@ namespace Hllizi\PHPMonads;
  * The class extends ArrayObject with the monad trait, providing appropriate implementations for bind() and return(), and adds additional convenient methods.
  */
 class ArrayMonad extends \ArrayObject
-	implements MonadInterface
+	implements MonadInterface, \Traversable
 
 {
     use MonadTrait;
