@@ -88,7 +88,7 @@ class MaybeMonad
      */
     public function isNothing()
     {
-        return !isSomething();
+        return !$this->isSomething();
     }
 
 
