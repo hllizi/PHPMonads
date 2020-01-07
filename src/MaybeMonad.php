@@ -69,6 +69,15 @@ class MaybeMonad
         return $this->value;
     }
 
+    /**
+     * @param $alternative
+     * @return mixed
+     */
+
+    public function getWithAlternative($alternative)
+    {
+        return $value ?? $alternative;
+    }
 
     /**
      * @return bool
