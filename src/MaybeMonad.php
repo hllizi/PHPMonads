@@ -76,7 +76,7 @@ class MaybeMonad
 
     public function getWithAlternative($alternative)
     {
-        return $value ?? $alternative;
+        return $this->isNothing() ? $alternative : $this->getValue();
     }
 
     /**
@@ -86,7 +86,7 @@ class MaybeMonad
      */
     public function isSomething()
     {
-        return isset($this->value);
+        return $this->value !== null;
     }
 
 
