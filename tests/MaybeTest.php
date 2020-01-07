@@ -28,6 +28,6 @@ class MaybeTest extends TestCase
     public function testGetWithAlternative()
     {
         $this->assertEquals("Test", $this->nothing->getWithAlternative("Test"));
-        $this->assertEquals("Test", $this->something->getWithAlternative("Test"));
+        $this->assertEquals("Hi", $this->something->getWithAlternative("Test"));
     }
 }
